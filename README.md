@@ -16,12 +16,8 @@ Compile the source code by entering the following commands:
 
 ``
 mkdir build
-
 cd build
-
 cmake ..
-
 make
-
 ./ExtendedKF
 ``
