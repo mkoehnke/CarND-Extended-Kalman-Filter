@@ -1,4 +1,4 @@
-# Extended Kalman Filter Project Starter Code
+# Extended Kalman Filter Project
 
 This project utilizes a kalman filter to estimate the state of a moving object of interest with noisy lidar and radar measurements. 
 
@@ -16,8 +16,12 @@ Compile the source code by entering the following commands:
 
 ``
 mkdir build
+
 cd build
+
 cmake ..
+
 make
+
 ./ExtendedKF
 ``
