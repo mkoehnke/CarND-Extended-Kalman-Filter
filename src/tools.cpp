@@ -39,7 +39,7 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
     
     //calculate the squared root
     rmse = rmse.array().sqrt();
-    
+
     //return the result
     return rmse;
 }
@@ -52,10 +52,11 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
     float vx = x_state(2);
     float vy = x_state(3);
     
-    float min_p = 0.0001;
-    if (fabs(px) < min_p and fabs(py) < min_p){
-        px = min_p;
-        py = min_p;
+    //check division by zero
+    float min_value = 0.0001;
+    if (fabs(px) < min_value and fabs(py) < min_value){
+        px = min_value;
+        py = min_value;
     }
     
     //pre-compute a set of terms to avoid repeated calculation
@@ -64,7 +65,7 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
     float c3 = (c1*c2);
     
     //check division by zero
-    if(fabs(c1) < min_p){
+    if(fabs(c1) < min_value){
         cout << "CalculateJacobian () - Error - Division by Zero" << endl;
         return Hj;
     }

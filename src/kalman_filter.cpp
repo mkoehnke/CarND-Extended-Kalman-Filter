@@ -1,7 +1,6 @@
 #include "kalman_filter.h"
 #include "tools.h"
 #include <iostream>
-#include <math.h>
 
 using Eigen::MatrixXd;
 using Eigen::VectorXd;
@@ -33,10 +32,10 @@ void KalmanFilter::Update(const VectorXd &z) {
 }
 
 void KalmanFilter::UpdateEKF(const VectorXd &z) {
-  double rho = sqrt(x_(0)*x_(0) + x_(1)*x_(1));
-  double theta = atan(x_(1) / x_(0));
+  double rho = std::sqrt(x_(0)*x_(0) + x_(1)*x_(1));
+  double theta = std::atan2(x_(1), x_(0));
   double rho_dot = (x_(0)*x_(2) + x_(1)*x_(3)) / rho;
-  VectorXd h = VectorXd(3); // h(x_)
+  VectorXd h = VectorXd(3);
   h << rho, theta, rho_dot;
   VectorXd y = z - h;
   CommonUpdate(NormalizeAngle(y));
@@ -57,17 +56,11 @@ void KalmanFilter::CommonUpdate(const VectorXd &y) {
 }
 
 VectorXd KalmanFilter::NormalizeAngle(VectorXd &y) {
-    float phi = y(1);
-    while (phi < -M_PI || phi > M_PI) {
-        if (phi < -M_PI) {
-            phi += M_PI * 2;
-        } else if (phi > M_PI) {
-            phi -= M_PI * 2;
-        }
-        std::cout << y(1) << std::endl;
+    while (y(1) < -M_PI) {
+        y(1) += 2 * M_PI;
     }
-    
-    y(1) = phi;
-    
+    while (y(1) > M_PI) {
+        y(1) -= 2 * M_PI;
+    }
     return y;
 }
