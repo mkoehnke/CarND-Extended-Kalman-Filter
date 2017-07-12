@@ -8,16 +8,18 @@ This project involves the Term 2 Simulator which can be downloaded [here](https:
 
 Install the uWebSocketIO using the following command:
 
-``
+```
 sh install-mac.sh
-``
+```
 
 Compile the source code by entering the following commands:
 
-``
+```
 mkdir build
 cd build
 cmake ..
 make
 ./ExtendedKF
-``
+```
+
+![EKF Simulator](https://github.com/mkoehnke/CarND-Extended-Kalman-Filter/raw/master/ekf-simulator.png)
